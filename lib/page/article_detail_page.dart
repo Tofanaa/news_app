@@ -1,6 +1,6 @@
-import 'package:news_app/data/model/article.dart';
 import 'package:flutter/material.dart';
 
+import '../data/model/article.dart';
 import 'article_web_view.dart';
 
 class ArticleDetailPage extends StatelessWidget {
@@ -14,35 +14,43 @@ class ArticleDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(article.title),
+        title: const Text("News App"),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.network(article.urlToImage),
+            Hero(
+              tag: article.urlToImage!,
+              child: Image.network(article.urlToImage!),
+            ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(article.description),
+                  Text(
+                    article.description ?? "",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                   const Divider(color: Colors.grey),
                   Text(
                     article.title,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const Divider(color: Colors.grey),
-                  Text('Date: ${article.publishedAt}'),
+                  Text(
+                    'Date: ${article.publishedAt}',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
                   const SizedBox(height: 10),
-                  Text('Author: ${article.author}'),
+                  Text(
+                    'Author: ${article.author}',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
                   const Divider(color: Colors.grey),
                   Text(
-                    article.content,
-                    style: const TextStyle(fontSize: 16),
+                    article.content ?? "",
+                    style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   const SizedBox(height: 10),
                   ElevatedButton(
