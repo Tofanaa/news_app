@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/data/api/api_service.dart';
+import 'package:news_app/provider/news_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../common/style.dart';
 import '../widgets/platform_widget.dart';
@@ -32,7 +35,10 @@ class _HomePageState extends State<HomePage> {
   ];
 
   final List<Widget> _listWidget = [
-    const ArticleListPage(),
+    ChangeNotifierProvider<NewsProvider>(
+      create: (_) => NewsProvider(apiService: ApiService()),
+      child: const ArticleListPage(),
+    ),
     const SettingsPage(),
   ];
 
