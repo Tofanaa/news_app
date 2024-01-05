@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
+import '../common/navigation.dart';
 import '../common/style.dart';
 import '../data/model/article.dart';
 import '../page/article_detail_page.dart';
@@ -31,11 +32,8 @@ class CardArticle extends StatelessWidget {
           article.title,
         ),
         subtitle: Text(article.author ?? ""),
-        onTap: () => Navigator.pushNamed(
-          context,
-          ArticleDetailPage.routeName,
-          arguments: article,
-        ),
+        onTap: () =>
+            Navigation.intentWithData(ArticleDetailPage.routeName, article),
       ),
     );
   }
